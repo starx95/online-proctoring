@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <!-- CSS -->
+    <style>
+      #my_camera {
+        width: 320px;
+        height: 240px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="my_camera"></div>
+
+    <div id="results"></div>
+    <div id="file"></div>
+  </body>
+  <!-- Webcam.min.js -->
+  <script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+
+  <!-- Configure a few settings and attach camera -->
+  <script language="JavaScript">
+    var fileName = "";
+    var data_uri = "";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBzzsBQLEskwb4ly6egRZgEctsjx90b1ig",
+      authDomain: "online-proctoring.firebaseapp.com",
+      projectId: "online-proctoring",
+      storageBucket: "online-proctoring.appspot.com",
+      messagingSenderId: "812057776891",
+      appId: "1:812057776891:web:66bca88a7867d94b2fd65e",
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    var firestore = firebase.firestore();
+    const snapshots = firestore.doc("snapshots/nizam");
+
+    Webcam.set({
+      width: 320,
+      height: 240,
+      image_format: "jpeg",
+      jpeg_quality: 90,
+    });
+    Webcam.attach("#my_camera");
+
+    var intervalId = window.setInterval(function () {
+      take_snapshot(data_uri);
+    }, 10000);
+
+    function take_snapshot(data_uri) {
+      // take snapshot and get image data
+      Webcam.snap(function (data_uri, fileName) {
+        var current = new Date();
+        $name = "'candidate name'";
+        fileName = $name + " " + current.toLocaleTimeString() + " " + data_uri;
+        document.getElementById("file").innerHTML = "<p>" + fileName + "</p>";
+        snapshots
+          .set({
+            image_snapshot: data_uri,
+          })
+          .then(function() {
+            console.log("Image saved successfully");
+          })
+          .catch(function (error) {
+            console.log("Got an error: ", error);
+          });
+      });
+    }
+  </script>
+</html>

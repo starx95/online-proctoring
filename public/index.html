@@ -7,29 +7,50 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+
+    <!-- Bootstrap CSS -->
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:1200,1400&display=swap"
       rel="stylesheet"
     />
 
     <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+      href="https://fonts.googleapis.com/css?family=Poppins:1200,1400,500&display=swap"
       rel="stylesheet"
     />
 
     <link
-      href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap"
+      href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:1200,1400&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
-
+    <script
+      src="https://kit.fontawesome.com/6700ac0c92.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="css/owl.carousel.min.css" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-
     <!-- Style -->
+    <style>
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 40%;
+        border-radius: 10px;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+    </style>
     <link rel="stylesheet" href="css/style.css" />
 
     <title>Online Proctoring</title>
@@ -51,53 +72,32 @@
           <div class="logo">
             <span>C</span>
           </div>
-          <span class="logo-text">Colorlib</span>
-        </div>
-
-        <div class="search-form">
-          <form action="#">
-            <span class="wrap-icon">
-              <span class="icon-search2"></span>
-            </span>
-            <input type="text" class="form-control" placeholder="Search..." />
-          </form>
+          <span class="logo-text" style="font-size: 30px">Student</span>
         </div>
         <div class="nav-menu">
           <ul>
             <li class="active">
               <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-home2 mr-3"></span
-                ><span class="menu-text">Home</span></a
+                ><span class="fas fa-pencil-alt fa-lg mr-3"></span
+                ><span class="menu-text" style="font-size: 25px"
+                  >&nbsp;Exam</span
+                ></a
               >
             </li>
             <li>
               <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-videocam mr-3"></span
-                ><span class="menu-text">Videos</span></a
+                ><span class="fas fa-graduation-cap fa-lg mr-3"></span
+                ><span class="menu-text" style="font-size: 25px"
+                  >&nbsp;Result</span
+                ></a
               >
             </li>
             <li>
               <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-book mr-3"></span
-                ><span class="menu-text">Books</span></a
-              >
-            </li>
-            <li>
-              <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-shopping-cart mr-3"></span
-                ><span class="menu-text">Store</span></a
-              >
-            </li>
-            <li>
-              <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-pie-chart mr-3"></span
-                ><span class="menu-text">Analytics</span></a
-              >
-            </li>
-            <li>
-              <a href="#" class="d-flex align-items-center"
-                ><span class="wrap-icon icon-cog mr-3"></span
-                ><span class="menu-text">Settings</span></a
+                ><span class="fas fa-comments fa-lg mr-3"></span
+                ><span class="menu-text" style="font-size: 25px"
+                  >&nbsp;Message</span
+                ></a
               >
             </li>
           </ul>
@@ -105,7 +105,93 @@
       </div>
     </aside>
     <main>
-     
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">All</a></li>
+          <li><a data-toggle="tab" href="#menu1">Upcoming</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="card" style="width: 450px; height: 80px">
+              <div class="container">
+                <table>
+                  <tr>
+                    <td style="width: 200px; ">
+                      <h4><b>Upcoming</b></h4>
+                      <p style="color: black;">Programming 1</p>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <p style="color: black; text-transform: uppercase">
+                        <i class="fa fa-calendar" aria-hidden="true"></i
+                        >&nbsp;2021.2.6
+                      </p>
+                      <p style="color: black; text-transform: uppercase">
+                        <i class="fa fa-clock" aria-hidden="true"></i
+                        >&nbsp;9.00am-12.00pm
+                      </p>
+                      <p style="color: black;">
+                        <i class="fas fa-user-friends"></i>&nbsp;152 candidates
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="card" style="width: 450px;">
+              <div class="container">
+                <table>
+                  <tr>
+                    <td style="width: 200px; height: 100px">
+                      <h4><b style="vertical-align: middle">Result Announcement</b></h4>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <p style="color: black; text-transform: uppercase">
+                        <i class="fa fa-calendar" aria-hidden="true"></i
+                        >&nbsp;2021.2.6
+                      </p>
+                      <p style="color: black; text-transform: uppercase">
+                        <i class="fa fa-clock" aria-hidden="true"></i
+                        >&nbsp;9.00am-12.00pm
+                      </p>
+                      <p style="color: black;">
+                        <i class="fas fa-user-friends"></i>&nbsp;152 candidates
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="card" style="width: 450px; height: 80px">
+              <div class="container">
+                <table>
+                  <tr>
+                    <td style="width: 200px; height: 100px">
+                      <h4><b style="vertical-align: middle">Paper checking</b></h4>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <p style="color: black; text-transform: uppercase">
+                        <i class="fa fa-calendar" aria-hidden="true"></i
+                        >&nbsp;2021.2.6 9.00am-12.00pm
+                      </p>
+                      <p style="color: black;">
+                        <i class="fas fa-user-friends"></i>&nbsp;152 candidates
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <h3>Upcoming</h3>
+            <p>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
