@@ -12,9 +12,11 @@
     </style>
   </head>
   <body>
+      <h3>Webcam Camera</h3>
     <div id="my_camera"></div>
-
+    <h3>Camera snapshot</h3>
     <div id="results"></div>
+    
     <div id="file"></div>
   </body>
   <!-- Webcam.min.js -->
@@ -55,18 +57,40 @@
         var current = new Date();
         $name = "'candidate name'";
         fileName = $name + " " + current.toLocaleTimeString() + " " + data_uri;
-        document.getElementById("file").innerHTML = "<p>" + fileName + "</p>";
+
         snapshots
           .set({
             image_snapshot: data_uri,
           })
-          .then(function() {
+          .then(function () {
             console.log("Image saved successfully");
           })
           .catch(function (error) {
             console.log("Got an error: ", error);
           });
+        retrieveImages(data_uri);
       });
+    }
+
+    function retrieveImages(data_uri) {
+      const docRef = firestore.collection("snapshots").doc("nizam");
+      docRef
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            console.log("Document data:", doc.data().image_snapshot);
+
+            // take snapshot and get image data
+            document.getElementById("results").innerHTML =
+              "<img src='" + doc.data().image_snapshot + "'/>";
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
     }
   </script>
 </html>
