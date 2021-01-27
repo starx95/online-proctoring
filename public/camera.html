@@ -18,13 +18,29 @@
     <div id="results"></div>
 
     <div id="file"></div>
+    
+<script>
+   
+  </script>
+</head>
+
+
+  <header>
+    <h1>voice recorder</h1>
+  </header>
+  <p>
+    <button id="btnStart">START RECORDING</button>
+
+  <button id="btnStop">STOP RECORDING</button>
+  <h1 id="status">Status</h1>
+  </p>
+  <audio id="adioPlay" controls></audio>
+
   </body>
   <!-- Webcam.min.js -->
   <script type="text/javascript" src="webcamjs/webcam.min.js"></script>
-
-  <!-- Configure a few settings and attach camera -->
   <script language="JavaScript">
-    var fileName = "";
+        var fileName = "";
     var data_uri = "";
     const firebaseConfig = {
       apiKey: "AIzaSyBzzsBQLEskwb4ly6egRZgEctsjx90b1ig",
@@ -39,6 +55,65 @@
     var firestore = firebase.firestore();
     const snapshots = firestore.doc("snapshots/nizam");
 
+
+      let audioIN = { audio: true };
+      navigator.mediaDevices
+      .getUserMedia(audioIN)
+      .then(function (mediaStreamObj) {
+        let audio = document.querySelector("audio");
+        audio.onloadedmetadata = function (ev) {
+          audio.play();
+        };
+
+        let start = document.getElementById("btnStart");
+        let stop = document.getElementById("btnStop");
+        let playAudio = document.getElementById("adioPlay");
+        let mediaRecorder = new MediaRecorder(mediaStreamObj);
+        start.addEventListener("click", function (ev) {
+        mediaRecorder.start();
+        document.getElementById('status').innerHTML = "Recording";
+          // console.log(mediaRecorder.state);
+        });
+
+        // Stop event
+        stop.addEventListener("click", function (ev) {
+        mediaRecorder.stop();
+        document.getElementById('status').innerHTML = "Stopped";
+          // console.log(mediaRecorder.state);
+        });
+        mediaRecorder.ondataavailable = function (ev) {
+          dataArray.push(ev.data);
+        };
+        let dataArray = [];
+        mediaRecorder.onstop = function (ev) {
+          let audioData = new Blob(dataArray, { type: "audio/mp3;" });
+          dataArray = [];
+          let audioSrc = window.URL.createObjectURL(audioData);
+          var reader = new FileReader(); 
+            reader.readAsDataURL(audioData); 
+            reader.onloadend = function () { 
+            var base64String = reader.result; 
+            console.log('Base64 String - ', base64String); 
+            snapshots
+                .update({
+                  audio_recording: base64String,
+                })
+                .then(function () {
+                  console.log("audio saved successfully");
+                })
+                .catch(function (error) {
+                  console.log("Got an error: ", error);
+                });
+              } 
+                  playAudio.src = audioSrc;
+                };
+      })
+      .catch(function (err) {
+        console.log(err.name, err.message);
+      });
+
+
+    //------------CAMERA-----------//
     Webcam.set({
       width: 320,
       height: 240,
@@ -59,7 +134,7 @@
         fileName = $name + " " + current.toLocaleTimeString() + " " + data_uri;
 
         snapshots
-          .set({
+          .update({
             image_snapshot: data_uri,
           })
           .then(function () {
