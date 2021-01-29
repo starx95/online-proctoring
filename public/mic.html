@@ -43,6 +43,7 @@
         $name = "'candidate name'";
         fileName = $name + " " + current.toLocaleTimeString() + " " + data_uri;
         let btnstop = document.querySelector('#btnStop').click();
+        let btn = document.querySelector('#btnStart').click();  
         
         snapshots
           .update({
@@ -52,7 +53,7 @@
             str_counter_0++;
             str_counter_1 = "Image_snapshot_"+str_counter_0;
             console.log("Image saved successfully");
-            let btn = document.querySelector('#btnStart').click();  
+            
           })
           .catch(function (error) {
             console.log("Got an error: ", error);
